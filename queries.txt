@@ -1,0 +1,51 @@
+1. Find all the topics and tasks which are thought in the month of October
+
+Ans :
+zen> db.topics.createIndex({Date :"text"})
+Date_text
+zen> db.topics.find({$text : {$search : "oct"}},{_id:0,Course:1,Topic:1,Date:1}).toArray()
+
+zen> db.tasks.createIndex({Date :"text"})
+Date_text
+zen> db.tasks.find({$text : {$search : "oct"}},{_id:0,Date:1,Course:1,Task:1}).toArray()
+
+
+
+2. Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+
+Ans :
+zen>  db.company_drives.find({$and:[{$text:{$search:"oct"}},{$and:[{"Date":{$gte:"15 oct 2020"}},{"Date":{$lte:"31 oct 2020"}}]}]},{Company:1,Role:1,CTC:1,Date:1}).toArray()
+
+
+
+3. Find all the company drives and students who are appeared for the placement.
+
+Ans :
+zen> db.company_drives.find({},{_id:0}).toArray()
+
+zen> db.users.find({"Placement Appeared":"yes"},{_id:0,Name:1,"Email Id":1,Course:1,Batch:1,"Placement Appeared":1}).toArray()
+
+
+
+4. Find the number of problems solved by the user in codekata
+
+Ans :
+zen> db.codekata.find({},{_id:0}).toArray()
+
+
+
+5. Find all the mentors with who has the mentee's count more than 15
+
+Ans:
+zen> db.mentors.find({"Mentee_count":{$gt:"15"}},{_id:0})
+
+
+
+6. Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
+
+Ans:
+zen>  db.attendance.createIndex({Date:"text"})
+Date_text
+zen> db.attendance.find({$and:[{$text:{$search:"oct"}},{$and:[{"Date":{$gte:"15 oct 2020"}},{"Date":{$lte:"31 oct 2020"}}]}]},{_id:0,Absent_users:1,Absent_count:1,Date:1}).toArray()
+
+zen> db.tasks.find({$and:[{$text:{$search:"oct"}},{$and:[{"Date":{$gte:"15 oct 2020"}},{"Date":{$lte:"31 oct 2020"}}]}]},{_id:0,Course:1,Task:1,Task_Not_Submitted:1,Date:1}).toArray()
