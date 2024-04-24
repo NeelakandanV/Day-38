@@ -1,2 +1,2 @@
 NOSQL Database - Mongodb </br>
-A basic database design for course academy 
+A basic database design for an Education company
